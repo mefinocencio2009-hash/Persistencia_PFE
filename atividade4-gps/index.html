@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="description" content="Mini GPS interativo com geolocalização, localStorage e drag and drop." />
+  <title>📍 Meu GPS Interativo — Atividade 4</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Orbes decorativos de fundo -->
+  <div class="orbs" aria-hidden="true">
+    <span class="orb orb--violet"></span>
+    <span class="orb orb--cyan"></span>
+    <span class="orb orb--green"></span>
+  </div>
+
+  <main class="wrap">
+    <!-- ░░ Cabeçalho ░░ -->
+    <header class="header">
+      <span class="badge">Atividade 4</span>
+      <h1 class="title">
+        Meu GPS <span class="title__grad">Interativo</span>
+      </h1>
+      <p class="subtitle">
+        Geolocation <span class="dot">·</span> localStorage <span class="dot">·</span> Drag&nbsp;&amp;&nbsp;Drop
+      </p>
+    </header>
+
+    <!-- ░░ Banner: última localização salva ░░ -->
+    <aside id="banner" class="banner is-hidden" aria-live="polite">
+      <span class="banner__icon">💾</span>
+      <div class="banner__body">
+        <strong class="banner__label">Sua última localização salva foi:</strong>
+        <span class="banner__coords" id="bannerCoords">--.------, --.------</span>
+        <small class="banner__date" id="bannerDate">—</small>
+      </div>
+    </aside>
+
+    <!-- ░░ Card do GPS ░░ -->
+    <section class="card card--gps" aria-labelledby="gpsTitle">
+      <div class="gps__head">
+        <span class="pulse" aria-hidden="true"></span>
+        <h2 id="gpsTitle" class="gps__title">Receptor GPS</h2>
+        <span id="status" class="status">Iniciando…</span>
+      </div>
+
+      <div class="coords is-stale" id="coords">
+        <article class="coord">
+          <small class="coord__label">LATITUDE</small>
+          <strong class="coord__value" id="lat">--.------</strong>
+        </article>
+
+        <article class="coord">
+          <small class="coord__label">LONGITUDE</small>
+          <strong class="coord__value" id="lng">--.------</strong>
+        </article>
+      </div>
+
+      <div class="meta">
+        <span id="precisao">Precisão: --</span>
+        <span id="hora">--</span>
+      </div>
+
+      <button id="btn" class="btn btn--primary" type="button">
+        <span class="btn__icon">📍</span>
+        <span class="btn__text">Capturar minha localização</span>
+      </button>
+    </section>
+
+    <!-- ░░ Mini-mapa ░░ -->
+    <section class="card card--map" aria-label="Mini-mapa da sua localização">
+      <iframe
+        id="mapa"
+        title="Mini-mapa da sua localização"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+      ></iframe>
+
+      <div id="mapaVazio" class="map-empty">
+        <div class="map-empty__content">
+          <span class="map-empty__icon">🗺️</span>
+          <p>O mini-mapa aparece aqui assim que sua localização for capturada.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ Zona de Drag & Drop ░░ -->
+    <section class="card card--drop" aria-labelledby="dropTitle">
+      <h2 id="dropTitle" class="sr-only">Zona de arrastar e soltar</h2>
+
+      <div class="dropzone">
+        <div
+          id="papel"
+          class="dropzone__item dropzone__item--papel"
+          draggable="true"
+          title="Arraste-me até a lixeira"
+          role="img"
+          aria-label="Papel arrastável"
+        >
+          📄
+        </div>
+
+        <div
+          id="lixeira"
+          class="dropzone__item dropzone__item--lixeira"
+          title="Solte o papel aqui"
+          role="img"
+          aria-label="Lixeira"
+        >
+          🗑️
+        </div>
+      </div>
+    </section>
+
+    <p class="hint">
+      Arraste o <b>📄 papel</b> até a <b>🗑️ lixeira</b> para apagar os dados salvos no navegador.
+    </p>
+
+    <button id="restaurar" class="btn btn--ghost is-hidden" type="button">
+      ↩️ Trazer o papel de volta
+    </button>
+
+    <footer class="footer">
+      Feito com <span class="heart">♥</span> — Geolocation API &amp; HTML5 Drag and Drop
+    </footer>
+  </main>
+
+  <!-- ░░ Toast ░░ -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
